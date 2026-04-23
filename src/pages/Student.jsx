@@ -4,7 +4,8 @@ function StudentDashboard({ user, logout }) {
   const [data, setData] = useState(null);
   const [sessions, setSessions] = useState([]);
   const [activeTab, setActiveTab] = useState("dashboard");
-  const [open, setOpen] = useState(false); // ✅ mobile menu
+  const [open, setOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false); // ✅ NEW
 
   useEffect(() => {
     if (!user?.id) return;
@@ -57,48 +58,64 @@ function StudentDashboard({ user, logout }) {
       <div
         className={`
           bg-[#0f172a] p-5 border-r border-white/10 fixed h-full z-20
+          flex flex-col justify-between
           transition-all duration-300
           ${open ? "left-0" : "-left-60"}
           w-60 md:left-0
         `}
       >
-        <h2 className="text-xl font-bold mb-6 text-blue-400">Student</h2>
 
-        <p
-          onClick={() => {
-            setActiveTab("dashboard");
-            setOpen(false);
-          }}
-          className={`mb-3 cursor-pointer ${
-            activeTab === "dashboard" ? "text-blue-400" : "hover:text-blue-400"
-          }`}
-        >
-          Dashboard
-        </p>
+        {/* TOP MENU */}
+        <div>
+          <h2 className="text-xl font-bold mb-6 text-blue-400">Student</h2>
 
-        <p
-          onClick={() => {
-            setActiveTab("attendance");
-            setOpen(false);
-          }}
-          className={`mb-3 cursor-pointer ${
-            activeTab === "attendance" ? "text-blue-400" : "hover:text-blue-400"
-          }`}
-        >
-          Attendance
-        </p>
+          <p
+            onClick={() => {
+              setActiveTab("dashboard");
+              setOpen(false);
+            }}
+            className={`mb-3 cursor-pointer ${
+              activeTab === "dashboard" ? "text-blue-400" : "hover:text-blue-400"
+            }`}
+          >
+            Dashboard
+          </p>
 
-        <p
-          onClick={() => {
-            setActiveTab("sessions");
-            setOpen(false);
-          }}
-          className={`mb-3 cursor-pointer ${
-            activeTab === "sessions" ? "text-blue-400" : "hover:text-blue-400"
-          }`}
-        >
-          Sessions
-        </p>
+          <p
+            onClick={() => {
+              setActiveTab("attendance");
+              setOpen(false);
+            }}
+            className={`mb-3 cursor-pointer ${
+              activeTab === "attendance" ? "text-blue-400" : "hover:text-blue-400"
+            }`}
+          >
+            Attendance
+          </p>
+
+          <p
+            onClick={() => {
+              setActiveTab("sessions");
+              setOpen(false);
+            }}
+            className={`mb-3 cursor-pointer ${
+              activeTab === "sessions" ? "text-blue-400" : "hover:text-blue-400"
+            }`}
+          >
+            Sessions
+          </p>
+        </div>
+
+        {/* BOTTOM LOGOUT */}
+        <div className="mt-10">
+          <button
+            onClick={logout}
+            className="w-full bg-red-500 py-2 rounded-lg"
+          >
+            Logout
+          </button>
+        </div>
+
       </div>
 
       {/* MAIN */}
@@ -108,7 +125,6 @@ function StudentDashboard({ user, logout }) {
         <div className="flex justify-between items-center bg-[#0f172a] p-4 border-b border-white/10 fixed md:left-60 left-0 right-0 top-0 z-10">
 
           <div className="flex items-center gap-3">
-            {/* MOBILE MENU BUTTON */}
             <button
               className="md:hidden text-xl"
               onClick={() => setOpen(!open)}
@@ -121,12 +137,27 @@ function StudentDashboard({ user, logout }) {
             </h1>
           </div>
 
-          <button
-            onClick={logout}
-            className="bg-red-500 px-4 py-2 rounded-lg"
-          >
-            Logout
-          </button>
+          {/* PROFILE */}
+          <div className="relative">
+            <div
+              onClick={() => setProfileOpen(!profileOpen)}
+              className="cursor-pointer bg-blue-500 w-10 h-10 flex items-center justify-center rounded-full"
+            >
+              {user.clerk_user_id?.charAt(0).toUpperCase()}
+            </div>
+
+            {profileOpen && (
+              <div className="absolute right-0 mt-2 bg-[#0f172a] border border-white/10 rounded shadow-lg p-2 w-32">
+                <p
+                  onClick={logout}
+                  className="cursor-pointer hover:text-red-400"
+                >
+                  Logout
+                </p>
+              </div>
+            )}
+          </div>
+
         </div>
 
         {/* CONTENT */}
@@ -145,7 +176,6 @@ function StudentDashboard({ user, logout }) {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-
                 <div className="bg-[#0f172a] p-4 rounded-xl text-center">
                   <p className="text-gray-400">Total Days</p>
                   <h2 className="text-2xl font-bold mt-2">{totalDays}</h2>
@@ -164,7 +194,6 @@ function StudentDashboard({ user, logout }) {
                     {absent}
                   </h2>
                 </div>
-
               </div>
 
               <div className="bg-[#0f172a] p-6 rounded-xl mb-6">
@@ -190,18 +219,14 @@ function StudentDashboard({ user, logout }) {
               <p className="mb-4 text-gray-400">Recent Attendance</p>
 
               <div className="flex gap-2 flex-wrap">
-                {history.length === 0 ? (
-                  <p className="text-gray-500">No attendance data</p>
-                ) : (
-                  history.map((h, i) => (
-                    <div
-                      key={i}
-                      className={`w-7 h-7 rounded-md ${
-                        h ? "bg-green-400" : "bg-red-400"
-                      }`}
-                    ></div>
-                  ))
-                )}
+                {history.map((h, i) => (
+                  <div
+                    key={i}
+                    className={`w-7 h-7 rounded-md ${
+                      h ? "bg-green-400" : "bg-red-400"
+                    }`}
+                  ></div>
+                ))}
               </div>
             </div>
           )}
@@ -211,33 +236,29 @@ function StudentDashboard({ user, logout }) {
             <div className="bg-[#0f172a] p-6 rounded-xl">
               <p className="mb-4 text-gray-400">Active Sessions</p>
 
-              {sessionWithStatus.length === 0 ? (
-                <p className="text-gray-500">No active sessions</p>
-              ) : (
-                sessionWithStatus.map(s => (
-                  <div
-                    key={s.id}
-                    className="border border-white/10 p-3 mb-2 rounded-lg flex justify-between"
-                  >
-                    <div>
-                      <p className="font-semibold text-blue-400">{s.title}</p>
-                      <p className="text-sm text-gray-400">
-                        {s.date} | {s.start_time} - {s.end_time}
-                      </p>
-                    </div>
-
-                    <span
-                      className={`px-3 py-1 rounded text-sm ${
-                        s.status === "present"
-                          ? "bg-green-500"
-                          : "bg-red-500"
-                      }`}
-                    >
-                      {s.status}
-                    </span>
+              {sessionWithStatus.map(s => (
+                <div
+                  key={s.id}
+                  className="border border-white/10 p-3 mb-2 rounded-lg flex justify-between"
+                >
+                  <div>
+                    <p className="font-semibold text-blue-400">{s.title}</p>
+                    <p className="text-sm text-gray-400">
+                      {s.date} | {s.start_time} - {s.end_time}
+                    </p>
                   </div>
-                ))
-              )}
+
+                  <span
+                    className={`px-3 py-1 rounded text-sm ${
+                      s.status === "present"
+                        ? "bg-green-500"
+                        : "bg-red-500"
+                    }`}
+                  >
+                    {s.status}
+                  </span>
+                </div>
+              ))}
             </div>
           )}
 
