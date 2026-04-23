@@ -69,49 +69,25 @@ function StudentDashboard({ user, logout }) {
         <div>
           <h2 className="text-xl font-bold mb-6 text-blue-400">Student</h2>
 
-          <p
-            onClick={() => {
-              setActiveTab("dashboard");
-              setOpen(false);
-            }}
-            className={`mb-3 cursor-pointer ${
-              activeTab === "dashboard" ? "text-blue-400" : "hover:text-blue-400"
-            }`}
-          >
+          <p onClick={() => { setActiveTab("dashboard"); setOpen(false); }}
+            className={`mb-3 cursor-pointer ${activeTab === "dashboard" ? "text-blue-400" : "hover:text-blue-400"}`}>
             Dashboard
           </p>
 
-          <p
-            onClick={() => {
-              setActiveTab("attendance");
-              setOpen(false);
-            }}
-            className={`mb-3 cursor-pointer ${
-              activeTab === "attendance" ? "text-blue-400" : "hover:text-blue-400"
-            }`}
-          >
+          <p onClick={() => { setActiveTab("attendance"); setOpen(false); }}
+            className={`mb-3 cursor-pointer ${activeTab === "attendance" ? "text-blue-400" : "hover:text-blue-400"}`}>
             Attendance
           </p>
 
-          <p
-            onClick={() => {
-              setActiveTab("sessions");
-              setOpen(false);
-            }}
-            className={`mb-3 cursor-pointer ${
-              activeTab === "sessions" ? "text-blue-400" : "hover:text-blue-400"
-            }`}
-          >
+          <p onClick={() => { setActiveTab("sessions"); setOpen(false); }}
+            className={`mb-3 cursor-pointer ${activeTab === "sessions" ? "text-blue-400" : "hover:text-blue-400"}`}>
             Sessions
           </p>
         </div>
 
-        {/* SIDEBAR LOGOUT */}
+        {/* LOGOUT */}
         <div className="mt-10">
-          <button
-            onClick={logout}
-            className="w-full bg-red-500 py-2 rounded-lg"
-          >
+          <button onClick={logout} className="w-full bg-red-500 py-2 rounded-lg">
             Logout
           </button>
         </div>
@@ -125,10 +101,7 @@ function StudentDashboard({ user, logout }) {
         <div className="flex justify-between items-center bg-[#0f172a] p-4 border-b border-white/10 fixed md:left-60 left-0 right-0 top-0 z-10">
 
           <div className="flex items-center gap-3">
-            <button
-              className="md:hidden text-xl"
-              onClick={() => setOpen(!open)}
-            >
+            <button className="md:hidden text-xl" onClick={() => setOpen(!open)}>
               ☰
             </button>
 
@@ -141,15 +114,24 @@ function StudentDashboard({ user, logout }) {
           <div className="relative">
             <div
               onClick={() => setProfileOpen(!profileOpen)}
-              className="cursor-pointer bg-blue-500 w-10 h-10 flex items-center justify-center rounded-full"
+              className="cursor-pointer w-10 h-10 rounded-full overflow-hidden border border-white/20"
             >
-              {user.clerk_user_id?.charAt(0).toUpperCase()}
+              {user?.imageUrl || user?.profileImage ? (
+                <img
+                  src={user.imageUrl || user.profileImage}
+                  alt="profile"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="bg-blue-500 w-full h-full flex items-center justify-center">
+                  {user.clerk_user_id?.charAt(0).toUpperCase()}
+                </div>
+              )}
             </div>
 
             {profileOpen && (
               <div className="absolute right-0 mt-2 bg-[#0f172a] border border-white/10 rounded shadow-lg w-48 overflow-hidden">
 
-                {/* USER INFO */}
                 <div className="p-3 border-b border-white/10">
                   <p className="text-sm text-gray-300">Signed in as</p>
                   <p className="text-blue-400 font-semibold">
@@ -157,9 +139,7 @@ function StudentDashboard({ user, logout }) {
                   </p>
                 </div>
 
-                {/* MENU */}
                 <div className="flex flex-col text-sm">
-
                   <p className="px-3 py-2 hover:bg-white/10 cursor-pointer">
                     👤 Profile
                   </p>
@@ -180,11 +160,9 @@ function StudentDashboard({ user, logout }) {
                   >
                     🚪 Logout
                   </p>
-
                 </div>
               </div>
             )}
-
           </div>
 
         </div>
