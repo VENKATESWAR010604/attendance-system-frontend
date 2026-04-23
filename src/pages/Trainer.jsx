@@ -174,28 +174,29 @@ function Trainer({ user, logout }) {
             <div className="bg-white/10 p-6 rounded-xl mb-6">
               <h3 className="mb-4">Create Session</h3>
 
-              {/* FIXED INPUTS */}
               <input
                 className="w-full p-2 mb-2 bg-[#020617] border text-white placeholder-gray-400"
                 placeholder="Title"
                 onChange={(e) => setTitle(e.target.value)}
               />
 
+              {/* ✅ FIXED DATE */}
               <input
                 type="date"
-                className="w-full p-2 mb-2 bg-[#020617] border text-white"
+                className="w-full p-2 mb-2 bg-[#020617] border text-white [color-scheme:dark]"
                 onChange={(e) => setDate(e.target.value)}
               />
 
+              {/* ✅ FIXED TIME */}
               <input
                 type="time"
-                className="w-full p-2 mb-2 bg-[#020617] border text-white"
+                className="w-full p-2 mb-2 bg-[#020617] border text-white [color-scheme:dark]"
                 onChange={(e) => setStart(e.target.value)}
               />
 
               <input
                 type="time"
-                className="w-full p-2 mb-2 bg-[#020617] border text-white"
+                className="w-full p-2 mb-2 bg-[#020617] border text-white [color-scheme:dark]"
                 onChange={(e) => setEnd(e.target.value)}
               />
 
@@ -206,8 +207,10 @@ function Trainer({ user, logout }) {
                 onChange={(e) => setBatch(e.target.value)}
               />
 
-              <button className="bg-green-500 px-4 py-2 mt-2 rounded"
-                onClick={createSession}>
+              <button
+                className="bg-green-500 px-4 py-2 mt-2 rounded"
+                onClick={createSession}
+              >
                 Create Session
               </button>
             </div>
