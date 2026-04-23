@@ -6,7 +6,7 @@ function Manager({ logout }) {
 
   useEffect(() => {
     // ✅ USERS (SAFE FORMAT HANDLING)
-    fetch("http://localhost:5000/users")
+    fetch(`${import.meta.env.VITE_API_URL}/users`)
       .then(res => res.json())
       .then(data => {
         console.log("USERS RAW:", data);
@@ -15,7 +15,7 @@ function Manager({ logout }) {
       });
 
     // ✅ ATTENDANCE (SAFE FORMAT HANDLING)
-    fetch("http://localhost:5000/attendance")
+    fetch(`${import.meta.env.VITE_API_URL}/attendance)
       .then(res => res.json())
       .then(data => {
         console.log("ATTENDANCE RAW:", data);

@@ -5,12 +5,12 @@ function Monitor({ logout }) {
   const [attendance, setAttendance] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch(`${import.meta.env.VITE_API_URL}/users`)
       .then(res => res.json())
       .then(data => setUsers(data || []));
 
     // ✅ real attendance data
-    fetch("http://localhost:5000/attendance")
+    fetch(`${import.meta.env.VITE_API_URL}/attendance`)
       .then(res => res.json())
       .then(data => setAttendance(data || []));
   }, []);

@@ -8,13 +8,13 @@ function StudentDashboard({ user, logout }) {
     if (!user?.id) return;
 
     // attendance
-    fetch(`http://localhost:5000/attendance/${user.id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/attendance/${user.id}`)
       .then(res => res.json())
       .then(res => setData(res))
       .catch(err => console.error(err));
 
     // sessions
-    fetch("http://localhost:5000/sessions")
+    fetch(`${import.meta.env.VITE_API_URL}/sessions`)
       .then(res => res.json())
       .then(res => setSessions(res || []))
       .catch(err => console.error(err));

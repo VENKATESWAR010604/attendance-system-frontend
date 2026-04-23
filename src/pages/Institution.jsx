@@ -7,7 +7,7 @@ function Institution({ logout }) {
 
   useEffect(() => {
     // ✅ SAFE FETCH BATCHES (handles both formats)
-    fetch("http://localhost:5000/batches")
+    fetch(`${import.meta.env.VITE_API_URL}/batches`)
       .then(res => res.json())
       .then(data => {
         console.log("BATCHES RAW:", data);
@@ -17,7 +17,7 @@ function Institution({ logout }) {
       .catch(err => console.error("Batches error:", err));
 
     // ✅ SAFE FETCH USERS (handles both formats)
-    fetch("http://localhost:5000/users")
+    fetch(`${import.meta.env.VITE_API_URL}/users`)
       .then(res => res.json())
       .then(data => {
         console.log("USERS RAW:", data);
@@ -27,7 +27,7 @@ function Institution({ logout }) {
       .catch(err => console.error("Users error:", err));
 
     // ✅ ATTENDANCE
-    fetch("http://localhost:5000/attendance")
+    fetch(`${import.meta.env.VITE_API_URL}/attendance`)
       .then(res => res.json())
       .then(data => {
         console.log("ATTENDANCE:", data);

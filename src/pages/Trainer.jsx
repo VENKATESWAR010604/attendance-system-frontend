@@ -12,7 +12,7 @@ function Trainer({ user, logout }) {
 
   // ✅ fetch students (so we can mark attendance)
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch(`${import.meta.env.VITE_API_URL}/users`)
       .then(res => res.json())
       .then(data => {
         const onlyStudents = data.filter(
@@ -25,7 +25,7 @@ function Trainer({ user, logout }) {
   // ✅ create session + auto attendance
   const createSession = async () => {
     try {
-      const res = await fetch("http://localhost:5000/sessions", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/sessions`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -44,7 +44,7 @@ function Trainer({ user, logout }) {
 
       // ✅ AUTO ADD ATTENDANCE FOR ALL STUDENTS
       for (let student of students) {
-        await fetch("http://localhost:5000/attendance/mark", {
+        await fetch(`${import.meta.env.VITE_API_URL}/attendance/mark`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -60,7 +60,7 @@ function Trainer({ user, logout }) {
       alert("Session + Attendance created ✅");
 
       // 🔄 refresh attendance list
-      fetch("http://localhost:5000/attendance")
+      fetch(`${import.meta.env.VITE_API_URL}/attendance`)
         .then(res => res.json())
         .then(data => setAttendance(data || []));
 
@@ -72,7 +72,7 @@ function Trainer({ user, logout }) {
 
   // ✅ fetch attendance
   useEffect(() => {
-    fetch("http://localhost:5000/attendance")
+    fetch(`${import.meta.env.VITE_API_URL}/attendance`)
       .then(res => res.json())
       .then(data => setAttendance(data || []));
   }, []);
