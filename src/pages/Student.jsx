@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 function StudentDashboard({ user, logout }) {
   const [data, setData] = useState(null);
   const [sessions, setSessions] = useState([]);
-  const [activeTab, setActiveTab] = useState("dashboard"); // ✅ added
+  const [activeTab, setActiveTab] = useState("dashboard");
+  const [open, setOpen] = useState(false); // ✅ mobile menu
 
   useEffect(() => {
     if (!user?.id) return;
@@ -44,12 +45,30 @@ function StudentDashboard({ user, logout }) {
   return (
     <div className="flex min-h-screen bg-[#020617] text-white">
 
+      {/* MOBILE OVERLAY */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black/50 z-10 md:hidden"
+          onClick={() => setOpen(false)}
+        ></div>
+      )}
+
       {/* SIDEBAR */}
-      <div className="w-60 bg-[#0f172a] p-5 border-r border-white/10 fixed h-full">
+      <div
+        className={`
+          bg-[#0f172a] p-5 border-r border-white/10 fixed h-full z-20
+          transition-all duration-300
+          ${open ? "left-0" : "-left-60"}
+          w-60 md:left-0
+        `}
+      >
         <h2 className="text-xl font-bold mb-6 text-blue-400">Student</h2>
 
         <p
-          onClick={() => setActiveTab("dashboard")}
+          onClick={() => {
+            setActiveTab("dashboard");
+            setOpen(false);
+          }}
           className={`mb-3 cursor-pointer ${
             activeTab === "dashboard" ? "text-blue-400" : "hover:text-blue-400"
           }`}
@@ -58,7 +77,10 @@ function StudentDashboard({ user, logout }) {
         </p>
 
         <p
-          onClick={() => setActiveTab("attendance")}
+          onClick={() => {
+            setActiveTab("attendance");
+            setOpen(false);
+          }}
           className={`mb-3 cursor-pointer ${
             activeTab === "attendance" ? "text-blue-400" : "hover:text-blue-400"
           }`}
@@ -67,7 +89,10 @@ function StudentDashboard({ user, logout }) {
         </p>
 
         <p
-          onClick={() => setActiveTab("sessions")}
+          onClick={() => {
+            setActiveTab("sessions");
+            setOpen(false);
+          }}
           className={`mb-3 cursor-pointer ${
             activeTab === "sessions" ? "text-blue-400" : "hover:text-blue-400"
           }`}
@@ -77,13 +102,24 @@ function StudentDashboard({ user, logout }) {
       </div>
 
       {/* MAIN */}
-      <div className="flex-1 ml-60 mt-16">
+      <div className="flex-1 md:ml-60 mt-16">
 
         {/* TOPBAR */}
-        <div className="flex justify-between items-center bg-[#0f172a] p-4 border-b border-white/10 fixed left-60 right-0 top-0 z-10">
-          <h1 className="text-xl font-bold text-blue-400">
-            Student Dashboard
-          </h1>
+        <div className="flex justify-between items-center bg-[#0f172a] p-4 border-b border-white/10 fixed md:left-60 left-0 right-0 top-0 z-10">
+
+          <div className="flex items-center gap-3">
+            {/* MOBILE MENU BUTTON */}
+            <button
+              className="md:hidden text-xl"
+              onClick={() => setOpen(!open)}
+            >
+              ☰
+            </button>
+
+            <h1 className="text-xl font-bold text-blue-400">
+              Student Dashboard
+            </h1>
+          </div>
 
           <button
             onClick={logout}
@@ -99,7 +135,7 @@ function StudentDashboard({ user, logout }) {
           {/* DASHBOARD */}
           {activeTab === "dashboard" && (
             <>
-              <div className="bg-[#0f172a] p-5 rounded-xl mb-6 shadow">
+              <div className="bg-[#0f172a] p-5 rounded-xl mb-6">
                 <h2 className="text-lg">
                   Welcome,{" "}
                   <span className="text-blue-400 font-semibold">
@@ -108,7 +144,7 @@ function StudentDashboard({ user, logout }) {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
 
                 <div className="bg-[#0f172a] p-4 rounded-xl text-center">
                   <p className="text-gray-400">Total Days</p>
