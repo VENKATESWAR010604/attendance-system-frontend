@@ -11,7 +11,7 @@ function Trainer({ user, logout }) {
   const [students, setStudents] = useState([]);
   const [open, setOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("dashboard"); // ✅ NEW
+  const [activeTab, setActiveTab] = useState("dashboard");
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/users`)
@@ -174,20 +174,37 @@ function Trainer({ user, logout }) {
             <div className="bg-white/10 p-6 rounded-xl mb-6">
               <h3 className="mb-4">Create Session</h3>
 
-              <input className="w-full p-2 mb-2 bg-transparent border" placeholder="Title"
-                onChange={(e) => setTitle(e.target.value)} />
+              {/* FIXED INPUTS */}
+              <input
+                className="w-full p-2 mb-2 bg-[#020617] border text-white placeholder-gray-400"
+                placeholder="Title"
+                onChange={(e) => setTitle(e.target.value)}
+              />
 
-              <input type="date" className="w-full p-2 mb-2 bg-transparent border"
-                onChange={(e) => setDate(e.target.value)} />
+              <input
+                type="date"
+                className="w-full p-2 mb-2 bg-[#020617] border text-white"
+                onChange={(e) => setDate(e.target.value)}
+              />
 
-              <input type="time" className="w-full p-2 mb-2 bg-transparent border"
-                onChange={(e) => setStart(e.target.value)} />
+              <input
+                type="time"
+                className="w-full p-2 mb-2 bg-[#020617] border text-white"
+                onChange={(e) => setStart(e.target.value)}
+              />
 
-              <input type="time" className="w-full p-2 mb-2 bg-transparent border"
-                onChange={(e) => setEnd(e.target.value)} />
+              <input
+                type="time"
+                className="w-full p-2 mb-2 bg-[#020617] border text-white"
+                onChange={(e) => setEnd(e.target.value)}
+              />
 
-              <input type="number" className="w-full p-2 mb-2 bg-transparent border"
-                value={batch} onChange={(e) => setBatch(e.target.value)} />
+              <input
+                type="number"
+                className="w-full p-2 mb-2 bg-[#020617] border text-white"
+                value={batch}
+                onChange={(e) => setBatch(e.target.value)}
+              />
 
               <button className="bg-green-500 px-4 py-2 mt-2 rounded"
                 onClick={createSession}>
