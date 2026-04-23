@@ -5,7 +5,7 @@ function StudentDashboard({ user, logout }) {
   const [sessions, setSessions] = useState([]);
   const [activeTab, setActiveTab] = useState("dashboard");
   const [open, setOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false); // ✅ NEW
+  const [profileOpen, setProfileOpen] = useState(false);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -65,7 +65,7 @@ function StudentDashboard({ user, logout }) {
         `}
       >
 
-        {/* TOP MENU */}
+        {/* MENU */}
         <div>
           <h2 className="text-xl font-bold mb-6 text-blue-400">Student</h2>
 
@@ -106,7 +106,7 @@ function StudentDashboard({ user, logout }) {
           </p>
         </div>
 
-        {/* BOTTOM LOGOUT */}
+        {/* SIDEBAR LOGOUT */}
         <div className="mt-10">
           <button
             onClick={logout}
@@ -147,15 +147,44 @@ function StudentDashboard({ user, logout }) {
             </div>
 
             {profileOpen && (
-              <div className="absolute right-0 mt-2 bg-[#0f172a] border border-white/10 rounded shadow-lg p-2 w-32">
-                <p
-                  onClick={logout}
-                  className="cursor-pointer hover:text-red-400"
-                >
-                  Logout
-                </p>
+              <div className="absolute right-0 mt-2 bg-[#0f172a] border border-white/10 rounded shadow-lg w-48 overflow-hidden">
+
+                {/* USER INFO */}
+                <div className="p-3 border-b border-white/10">
+                  <p className="text-sm text-gray-300">Signed in as</p>
+                  <p className="text-blue-400 font-semibold">
+                    {user.clerk_user_id}
+                  </p>
+                </div>
+
+                {/* MENU */}
+                <div className="flex flex-col text-sm">
+
+                  <p className="px-3 py-2 hover:bg-white/10 cursor-pointer">
+                    👤 Profile
+                  </p>
+
+                  <p className="px-3 py-2 hover:bg-white/10 cursor-pointer">
+                    ⚙️ Settings
+                  </p>
+
+                  <p className="px-3 py-2 hover:bg-white/10 cursor-pointer">
+                    🔔 Notifications
+                  </p>
+
+                  <div className="border-t border-white/10"></div>
+
+                  <p
+                    onClick={logout}
+                    className="px-3 py-2 hover:bg-red-500/20 text-red-400 cursor-pointer"
+                  >
+                    🚪 Logout
+                  </p>
+
+                </div>
               </div>
             )}
+
           </div>
 
         </div>
