@@ -15,7 +15,7 @@ function Manager({ logout }) {
       });
 
     // ✅ ATTENDANCE (SAFE FORMAT HANDLING)
-    fetch(`${import.meta.env.VITE_API_URL}/attendance)
+    fetch(`${import.meta.env.VITE_API_URL}/attendance`)
       .then(res => res.json())
       .then(data => {
         console.log("ATTENDANCE RAW:", data);
