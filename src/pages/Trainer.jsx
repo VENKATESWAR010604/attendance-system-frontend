@@ -79,7 +79,7 @@ function Trainer({ user, logout }) {
 
   const trainerAttendance = attendance;
 
-  const inviteLink = `http://localhost:5173/join?batch_id=${batch}`;
+  const inviteLink = `https://your-frontend.vercel.app/join?batch_id=${batch}`;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#020617] to-[#0f172a] text-white p-6">
