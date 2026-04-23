@@ -1,3 +1,42 @@
+## 🔗 Live URLs ###
+
+Frontend (User Interface):https://attendance-system-frontend-chi.vercel.app/
+Backend (Server):https://attendance-system-backend-jow9.onrender.com
+API Base URL:https://attendance-system-backend-jow9.onrender.com/users
+
+##  Test Accounts
+
+Use the following credentials to test different user roles:
+
+| Role        | User id                                      | Password |
+| ----------- | ------------------------------------------- | -------- |
+| student              :kasu_reddy  : 1234  
+| Trainer              : reddy_12    :@reddy
+| Institution          :  dharma_    :@dharma
+| Programme manager    :  eswar_     :@eswar
+| Monitor              : shiva_      :@shiva
+
+
+### Notes
+
+* All accounts are pre-seeded in the database
+* Roles have different access levels and dashboards
+* If login fails, ensure backend server is running and database is connected
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
