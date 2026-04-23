@@ -16,6 +16,164 @@ Use the following credentials to test different user roles:
 | Programme manager    :  eswar_     :@eswar
 | Monitor              : shiva_      :@shiva
 
+## ⚙️ Project Setup (Frontend + Backend)
+
+Follow the steps below to set up the project locally.
+
+---
+
+## 🖥️ Backend Setup (Node.js + Express + PostgreSQL)
+
+### 1. Initialize Backend
+
+```bash
+mkdir backend
+cd backend
+npm init -y
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install express pg cors dotenv @clerk/clerk-sdk-node
+```
+
+---
+
+### 3. Project Structure
+
+```
+backend/
+│── server.js
+│── db.js
+│── .env
+```
+
+---
+
+### 4. Create `.env` File
+
+```
+PORT=5000
+DATABASE_URL=
+CLERK_SECRET_KEY=
+```
+
+---
+
+### 5. Run Backend
+
+```bash
+node server.js
+```
+
+Server runs on:
+
+```
+http://localhost:5000
+```
+
+---
+
+## 🌐 Frontend Setup (React + Vite + Tailwind)
+
+### 1. Create Frontend
+
+```bash
+npm create vite@latest frontend
+cd frontend
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+### 3. Run Frontend
+
+```bash
+npm run dev
+```
+
+Frontend runs on:
+
+```
+http://localhost:5173
+```
+
+---
+
+### 4. Install Tailwind CSS
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+---
+
+### 5. Configure Tailwind
+
+#### `tailwind.config.js`
+
+```js
+content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+theme: {
+  extend: {},
+},
+plugins: [],
+```
+
+#### `index.css`
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+---
+
+### 6. API Setup
+
+Create `.env` in frontend:
+
+```
+VITE_API_URL=http:
+```
+
+---
+
+## ✅ Final Run Order
+
+1. Start Backend:
+
+```bash
+cd backend
+node server.js
+```
+
+2. Start Frontend:
+
+```bash
+cd frontend
+npm run dev
+```
+
+---
+
+## 🎉 Done
+
+* Frontend → http://localhost:5173
+* Backend → http://localhost:5000
+* API → http://localhost:5000/api
+
+---
+
+
 
  🧠 Schema Design Decisions
 
